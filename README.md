@@ -1,6 +1,6 @@
 # PETSCII Panic
 
-https://m0nde.itch.io
+https://m0nde.itch.io/petscii-panic
 
 ```
   PETSCII PANIC  HTTPS://M0NDE.ITCH.IO
