@@ -122,9 +122,9 @@
 1220 n=n+1:next:zn(ll)=n:return
 1230 m$="the zombies got in!":goto1250
 1240 m$="lawn defended! you win!"
-1250 poke53269,0:o$="":fori=1to39:o$=o$+" ":next:printchr$(19)d$o$:printo$
-1260 printchr$(19)d$m$"     "
-1270 print"press fire or space to play again";
+1250 poke53269,0:fori=1904to2023:pokei,32:next
+1260 printchr$(19)d$m$;
+1270 printchr$(19)d$chr$(17)"press fire or space to play again";
 1280 if(peek(56320)and16)=0then1280
 1290 getk$:ifk$=" "thenrun
 1300 if(peek(56320)and16)then1290
