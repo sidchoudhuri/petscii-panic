@@ -2,7 +2,7 @@
 
 A lawn-defense game for the Commodore 64, written in pure BASIC V2 and drawn entirely in stock PETSCII.
 
-https://m0nde.itch.io
+https://m0nde.itch.io/petscii-panic
 
 ---
 
