@@ -18,9 +18,9 @@
 180 ifs2=0thenv2=v1:v3=v1
 190 poke54296,16+ev:ifs2thenpoke54328,mv
 200 ifpeek(789)<>144thenpoke36879,mv:poke36870,s2:sys36864
-210 fori=1104to1943:pokei,160:next:sp=29406
+210 fori=1104to1943:pokei,160:next:sp=29436
 220 gosub360
-230 n=peek(sp):sp=sp+o:ifn=uthensp=29413:goto230
+230 n=peek(sp):sp=sp+o:ifn=uthensp=29443:goto230
 240 ifn=0then320
 250 forj=1ton:sl=peek(sp):sh=peek(sp+1):dl=peek(sp+2):dh=peek(sp+3)
 260 w=peek(sp+4):h=peek(sp+5):sp=sp+6:ifw=0thengosub400:goto310
@@ -30,11 +30,11 @@
 300 next
 310 nextj
 320 p1=p1-1:ifp1<0thenp1=109-1
-330 p2=p2+1:ifp2>=536thenp2=0
+330 p2=p2+1:ifp2>=551thenp2=0
 340 gosub360:getk$:ifk$="q"then500
 350 goto230
 360 s=20482+p1:d=1024:gosub380:s=20631+p1:d=55296:gosub380
-370 s=20780+p2:d=1984:gosub380:s=21356+p2:d=56256
+370 s=20780+p2:d=1984:gosub380:s=21371+p2:d=56256
 380 sh=int(s/v):poke90,s-v*sh:poke91,sh:dh=int(d/v):poke88,d-v*dh:poke89,dh
 390 poke781,o:poke782,z:sysy:return
 400 ifh>15thenpoke53281,h-16:return
