@@ -47,7 +47,7 @@ The menu plays the game's music, with zombies and a peashooter on screen. Press 
 | S | SID setup: auto detect, one SID, or two with the music on the second at $D420 |
 | Q | quit |
 
-Start everything from the menu: the other programs need what it sets up, and they say so if you run them on their own.
+The games and demos also load on their own (they load the music themselves). The glyph showcase and both trailers need the menu run first, and say so if it wasn't.
 
 On the game's title screen, press **fire** for joystick or **space** for keyboard, then choose **Easy**, **Normal** or **Hard**.
 
@@ -91,8 +91,13 @@ With two SIDs the music starts at its lowest setting. With one SID, sound and mu
 
 - `sid/`: the music, *Backyard Panic* by m0nde, as `.sid` files for PAL and NTSC.
 - `devlog.md`: how the game was made.
+- `roadmap.md`: what's done and what's next.
 
 ## Credits
 
 - Design, code, graphics and music by m0nde.
 - Font copy trick by Eyvind Ebsen.
+
+## License
+
+PETSCII Panic! is © 2026 m0nde, licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): you may share and adapt it for non-commercial use, with credit and under the same license. Selling it, or any part of it, needs m0nde's permission. See `LICENSE`.

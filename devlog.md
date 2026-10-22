@@ -1,6 +1,6 @@
 # PETSCII Panic — Devlog
 
-A lawn-defense game for the Commodore 64, written in pure BASIC V2 and drawn entirely in stock PETSCII.
+A lawn-defense game for the Commodore 64, written in BASIC V2. It started as one program drawn entirely in stock PETSCII, and is now a disk with two versions of the game (multicolor graphics and the original PETSCII), demos, a glyph showcase, a trailer and its own music.
 
 https://m0nde.itch.io/petscii-panic
 
@@ -86,3 +86,54 @@ Right after the sun meter went in, the keyboard stopped working mid-game and the
 - Playtest balance across all three difficulties.
 - More zombie and plant variety.
 - Maybe falling suns to catch, instead of automatic income.
+
+---
+
+## 2026-10-21 to 2026-10-22: v01 to v05, from one program to a disk
+
+### Two versions of the game
+
+The game now comes in two versions that are kept in step:
+
+- **Multicolor graphics** (`PANICMC`): 52 custom multicolor characters, built at $C800 with Eyvind Ebsen's fast font copy trick. Every object is a 2×2 glyph, and they animate by swapping characters: zombies walk and chomp, peashooters fire, wall-nuts show their damage, cherry bombs explode.
+- **Original PETSCII** (`PANICPETSCII`): the stock-PETSCII game from the first entry.
+
+The sound effects were rebuilt to match recorded samples (a punch, digging) with SID waveforms, envelopes and the filter, instead of generic tones.
+
+### Music: Backyard Panic!
+
+An original three-voice tune in D minor, played by a small machine code IRQ player loaded at $9000 (`PANICMUSIC`). With a second SID at $D420 the music gets a chip of its own; with one SID it shares the chip with the sound effects. It is also released as `.sid` files for PAL and NTSC.
+
+Volume follows PETSCII Pit's rule: with two SIDs, **M** and **E** set the music and sound effects volume and the music starts at its lowest setting; with one SID, **V** sets the volume and everything starts at its loudest.
+
+### A menu, like PETSCII Pit
+
+The disk now starts with a loader (`PETSCIIPANIC`) in the same style as PETSCII Pit's. It loads the music, detects the SIDs, builds the character set and shows a menu, with one lane of double-size sprites playing the game on the title screen. From the menu: the two games, the glyph showcase, the demos, the trailer, instructions, credits, SID setup and quit. **Q** in a game goes back to the menu.
+
+The menu's settings (SID choice and volumes) are kept in memory the programs share, so they survive going from one program to another.
+
+The disk directory has PETSCII art in the same style as Pit's: a peashooter under the loader, then the zombie and the links, then the rest of the files.
+
+### Versions
+
+From v01 every release carries its version, as in PETSCII Pit: the disk ID is the version, and it shows on the title screens, instructions, credits and every program's line 10 REM. Loading messages say only what's loading, not the version.
+
+- **v01:** the two games, the music, the menu and the glyph showcase. The music is stopped during every disk load (as in Pit) because playing it while loading corrupted it.
+- **v02:** a faster pace. A shorter wait before wave 1 and between waves, zombie speed now depends on the difficulty, and hard mode's zombies are twice as fast and arrive about a third sooner. The title screen got sound effects, and its zombies bite at the hard-mode rate.
+- **v03:** a first self-playing demo at the menu's double size.
+- **v04:** the demo was rebuilt at the game's normal multicolor size: the real game with a computer player that moves the cursor to each square and plants. The lawnmower's handle is white in the multicolor graphics. The first scene trailer: a song line scrolling at the top, one huge lane of game characters playing, and a scroller at the bottom, in both machine code and BASIC.
+- **v05:** the full trailer goes on from the huge lane into the multicolor game and then the PETSCII game, each well into wave 3, joined by top-to-bottom wipes, and loops until **Q**. The game footage comes from a port of the game's rules and the demo's planting, run to wave 3 and recorded. The BASIC trailer stays as the huge lane. The demo now has an original PETSCII version too, and **D** in the menu asks which.
+
+### Bugs of the week
+
+- **Lines cut at 80 characters.** A few listing lines were silently cut off when pasted, which showed up as `?BAD SUBSCRIPT`. Every line is now kept under 80 characters.
+- **The trailer and `CLR`.** When the menu loads another program, that program moves BASIC's variable area to just past itself. The new trailer didn't `CLR` afterwards, so its first variable landed on stale pointers: `?ILLEGAL QUANTITY`. It now clears, like the other programs.
+- **The trailer and zero page.** The trailer's machine code used $57–$6E for its pointers. That's BASIC's floating-point work area, and two of those bytes are still read by BASIC afterwards, so quitting with **Q** gave `?ILLEGAL QUANTITY` with a garbled line number. The trailer now saves $57–$70 when it starts and puts them back when it returns.
+
+### Under the hood
+
+- The games, the demos, the menu, the glyph showcase and the BASIC trailer are all BASIC V2. Machine code is used only for the music player and the full trailer.
+- The games are about 270 (PETSCII) and 320 (multicolor) lines.
+- The games and demos still run on their own and load the music themselves. The glyph showcase and the trailers need the menu run first.
+
+What's next is in `roadmap.md`.
